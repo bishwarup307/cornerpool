@@ -29,4 +29,5 @@ setup(
         "Operating System :: Linux, Unix",
     ],
     license="MIT",
+    url="https://github.com/bishwarup307/cornerpool",
 )

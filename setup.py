@@ -26,7 +26,7 @@ setup(
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
-        "Operating System :: Linux, Unix",
+        "Operating System :: OS Independent",
     ],
     license="MIT",
     url="https://github.com/bishwarup307/cornerpool",

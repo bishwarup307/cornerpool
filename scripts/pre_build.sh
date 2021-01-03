@@ -1,3 +1,5 @@
+yum install wget
+
 mkdir ~/glibc_install; cd ~/glibc_install 
 wget http://ftp.gnu.org/gnu/glibc/glibc-2.14.tar.gz
 tar zxvf glibc-2.14.tar.gz

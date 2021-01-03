@@ -25,8 +25,10 @@ jobs:
       - name: Build wheels
         run: python -m cibuildwheel --output-dir wheelhouse
         env:
+          CIBW_MANYLINUX_X86_64_IMAGE: manylinux2014
+          CIBW_MANYLINUX_I686_IMAGE: manylinux2014
           CIBW_SKIP: "cp27-* pp27-* cp35-*"  # skip Python 2.7 wheels
-          CIBW_BEFORE_BUILD_LINUX: pip install glibc torch #bash scripts/pre_build.sh
+          CIBW_BEFORE_BUILD_LINUX: pip install torch #bash scripts/pre_build.sh
           # CIBW_BEFORE_BUILD_MACOS: pip install torch
       - uses: actions/upload-artifact@v2
         with:

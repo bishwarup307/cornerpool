@@ -25,7 +25,7 @@ jobs:
       - name: Build wheels
         run: python -m cibuildwheel --output-dir wheelhouse
         env:
-          CIBW_SKIP: "cp27-* pp27-*"  # skip Python 2.7 wheels
+          CIBW_SKIP: "cp27-* pp27-* cp35-*"  # skip Python 2.7 wheels
           CIBW_BEFORE_BUILD: yum install glibc-devel && pip install torch
 
       - uses: actions/upload-artifact@v2

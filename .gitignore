@@ -1,0 +1,5 @@
+build/
+cpools.egg-info/
+dist/
+.vscode/
+*.so

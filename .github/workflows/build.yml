@@ -8,7 +8,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-20.04]
+        os: [ubuntu-20.04, macos-latest]
         # python-version: [3.6, 3.7, 3.8]
 
     steps:
@@ -25,13 +25,17 @@ jobs:
       - name: Build wheels
         run: python -m cibuildwheel --output-dir wheelhouse
         env:
-          CIBW_BEFORE_ALL: bash scripts/pre_build.sh
+          CIBW_BUILD: "*-macosx_x86_64 *-manylinux_x86_64"
+          CIBW_SKIP: "cp27-* cp39-* pp*"
+          CIBW_BEFORE_ALL_LINUX: bash scripts/pre_build_linux.sh
+          CIBW_BEFORE_ALL_MACOS: sh scripts/pre_build_macos.sh
           CIBW_MANYLINUX_X86_64_IMAGE: manylinux2014
-          CIBW_MANYLINUX_I686_IMAGE: manylinux2014
-          CIBW_SKIP: "cp27-* pp27-* cp35-* cp39-*"  # skip Python 2.7 wheels
+          # CIBW_SKIP: "cp27-* pp27-* cp35-* cp39-* *_aarch64 *_i686 *_ppc64le"
           CIBW_BEFORE_BUILD_LINUX: pip install torch==1.7.1+cpu -f https://download.pytorch.org/whl/torch_stable.html
           CIBW_REPAIR_WHEEL_COMMAND_LINUX: 'LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/libtorch/lib auditwheel repair -w {dest_dir} {wheel}'
-          # CIBW_BEFORE_BUILD_MACOS: pip install torch
+          CIBW_BEFORE_BUILD_MACOS: pip install torch
+          CIBW_REPAIR_WHEEL_COMMAND_MACOS: 'DYLD_FALLBACK_LIBRARY_PATH=/opt/libtorch/lib:/usr/lib delocate-listdeps {wheel} && delocate-wheel --require-archs x86_64 -w {dest_dir} {wheel}'
+
       - uses: actions/upload-artifact@v2
         with:
           path: ./wheelhouse/*.whl

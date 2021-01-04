@@ -28,7 +28,7 @@ jobs:
           CIBW_MANYLINUX_X86_64_IMAGE: manylinux2014
           CIBW_MANYLINUX_I686_IMAGE: manylinux2014
           CIBW_SKIP: "cp27-* pp27-* cp35-* cp39-*"  # skip Python 2.7 wheels
-          CIBW_BEFORE_BUILD_LINUX: bash scripts/pre_build.sh && pip install torch==1.7.1+cpu -f https://download.pytorch.org/whl/torch_stable.html && export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/libtorch/lib && echo $LD_LIBRARY_PATH
+          CIBW_BEFORE_BUILD_LINUX: bash scripts/pre_build.sh && pip install torch==1.7.1+cpu -f https://download.pytorch.org/whl/torch_stable.html && echo export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/libtorch/lib >> ~/.bashrc && source ~/.bashrc && cat ~/.bashrc
           # CIBW_ENVIRONMENT: 
           # CIBW_BEFORE_BUILD_MACOS: pip install torch
       - uses: actions/upload-artifact@v2

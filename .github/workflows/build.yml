@@ -26,7 +26,7 @@ jobs:
         run: python -m cibuildwheel --output-dir wheelhouse
         env:
           CIBW_BUILD: "*-macosx_x86_64 *-manylinux_x86_64"
-          CIBW_SKIP: "cp27-* cp39-* pp*"
+          CIBW_SKIP: "cp27-* cp35-* cp39-* pp*"
           CIBW_BEFORE_ALL_LINUX: bash scripts/pre_build_linux.sh
           CIBW_BEFORE_ALL_MACOS: sh scripts/pre_build_macos.sh
           CIBW_MANYLINUX_X86_64_IMAGE: manylinux2014

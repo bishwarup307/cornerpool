@@ -34,7 +34,7 @@ jobs:
           CIBW_BEFORE_BUILD_LINUX: pip install torch==1.7.1+cpu -f https://download.pytorch.org/whl/torch_stable.html
           CIBW_REPAIR_WHEEL_COMMAND_LINUX: LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/libtorch/lib auditwheel repair -w {dest_dir} {wheel}
           CIBW_BEFORE_BUILD_MACOS: pip install torch==1.7.1
-          CIBW_REPAIR_WHEEL_COMMAND_MACOS: DYLD_FALLBACK_LIBRARY_PATH=${{ github.workspace }}/libtorch/lib:/usr/lib delocate-listdeps {wheel} && delocate-wheel --require-archs x86_64 -w {dest_dir} {wheel}
+          CIBW_REPAIR_WHEEL_COMMAND_MACOS: DYLD_FALLBACK_LIBRARY_PATH=$GITHUB_WORKSPACE/libtorch/lib:/usr/lib delocate-listdeps {wheel} && delocate-wheel --require-archs x86_64 -w {dest_dir} {wheel}
 
       - uses: actions/upload-artifact@v2
         with:

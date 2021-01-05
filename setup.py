@@ -9,18 +9,20 @@ with open(path.join(here, "README.md"), encoding="utf-8") as f:
 
 setup(
     name="cornerpool",
-    version="0.0.1",
+    version="0.0.2",
     description="Cornerpooling in pytorch",
     long_description=long_description,
     author="Bishwarup Bhattacharjee",
-    author_email="write2bishwarup@eagleview.com",
+    author_email="write2bishwarup@gmail.com",
     python_requires=">=3.6",
     packages=find_packages(),
     ext_modules=[
-        CppExtension("top_pool", ["./cornerpool/src/top_pool.cpp"]),
-        CppExtension("bottom_pool", ["./cornerpool/src/bottom_pool.cpp"]),
-        CppExtension("left_pool", ["./cornerpool/src/left_pool.cpp"]),
-        CppExtension("right_pool", ["./cornerpool/src/right_pool.cpp"]),
+        CppExtension("cornerpool.libs.top_pool", ["./cornerpool/src/top_pool.cpp"]),
+        CppExtension(
+            "cornerpool.libs.bottom_pool", ["./cornerpool/src/bottom_pool.cpp"]
+        ),
+        CppExtension("cornerpool.libs.left_pool", ["./cornerpool/src/left_pool.cpp"]),
+        CppExtension("cornerpool.libs.right_pool", ["./cornerpool/src/right_pool.cpp"]),
     ],
     cmdclass={"build_ext": BuildExtension},
     classifiers=[

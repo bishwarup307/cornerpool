@@ -1,13 +1,13 @@
 from torch import nn
 from torch.autograd import Function
 
+import cornerpool.libs.bottom_pool
+import cornerpool.libs.left_pool
+import cornerpool.libs.right_pool
+
 # from .libs import bottom_pool, right_pool, left_pool, top_pool
 # from cornerpool import libs
 import cornerpool.libs.top_pool
-import cornerpool.libs.bottom_pool
-import cornerpool.libs.right_pool
-import cornerpool.libs.left_pool
-
 
 __all__ = ["TopPool", "BottomPool", "LeftPool", "RightPool"]
 
@@ -70,6 +70,7 @@ class RightPoolFunction(Function):
 
 class TopPool(nn.Module):
     def forward(self, x):
+        TopPoolFunction(x)
         return TopPoolFunction.apply(x)
 
 
